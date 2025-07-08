@@ -1,0 +1,107 @@
+<div class="flex flex-wrap gap-4 justify-center items-center p-4">
+  <button
+    phx-click="start_stream"
+    id="start-test"
+    disabled={@is_streaming}
+    class="btn  btn-primary btn-soft"
+  >
+    {if @is_streaming, do: "🟢 Screaming...", else: "▶️ Start Scream"}
+  </button>
+
+  <button phx-click="stop_stream" disabled={!@is_streaming} class="btn btn-soft btn-warning">
+    ⏹️ Stop Stream
+  </button>
+
+  <button phx-click="clear_data" class="btn btn-soft btn-error">
+    🗑️ Clear Data
+  </button>
+</div>
+
+<!-- Statistics -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm text-gray-600 font-medium">Last Moving Average</p>
+        <p class="text-xl font-bold text-blue-600">{@current_average}</p>
+      </div>
+      <div class="bg-blue-100 p-3 rounded-full">
+        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+          >
+          </path>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm text-gray-600 font-medium">Number of points in period</p>
+        <p class="text-xl font-bold text-blue-600">{@nb_points}</p>
+      </div>
+      <div class="bg-blue-100 p-3 rounded-full">
+        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+          >
+          </path>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm text-gray-600 font-medium">Instant price</p>
+        <p class="text-xl font-bold text-blue-600">{@value}</p>
+      </div>
+      <div class="bg-blue-100 p-3 rounded-full">
+        <Squiggly.display change1={@trend} />
+        <%!-- <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+          >
+          </path>
+        </svg> --%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SVG chart -->
+<Svg.display chart={@chart} period={@period} nb_points={@avg_chart_len} change={@period_change} />
+<br />
+<div class="bg-white p-6 rounded-lg shadow-lg border">
+  <div
+    id="lightweight-chart"
+    phx-hook="Chart"
+    class="flex justify-center w-full"
+    phx-update="ignore"
+  >
+  </div>
+</div>
+<br />
+
+<!-- Raw Data Stream -->
+<%!-- <div class="bg-gray-50 p-6 rounded-lg">
+  <h3 class="text-lg font-semibold text-gray-800 mb-4">Raw Data Stream</h3>
+  <div class="space-y-2 max-h-96 overflow-y-auto">
+    <div id="binance-data-stream" phx-update="stream" class="space-y-2">
+      <ul :for={{dom_id, data} <- @streams.data} id={dom_id} class="bg-white p-3rounded border">
+        <li class="text-sm text-gray-600">{DateTime.from_unix!(data.id, :microsecond)}</li>
+        <li class="font-semibold text-gray-800">Price: ${data.p}</li>
+      </ul>
+    </div>
+  </div>
+</div> --%>
