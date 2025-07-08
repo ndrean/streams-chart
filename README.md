@@ -1,6 +1,8 @@
 # ExStreams
 
-Receive strams from Binance endpoint with `websockEx`
+Receive streams from Binance endpoint with `websockEx`
+Start/stop the WebSockEx GenServer on-the-fly
+Start the "moving-average" GenServer calculator on mount.
 
 Render:
 - statistics:
