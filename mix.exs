@@ -72,7 +72,7 @@ defmodule ExStreams.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "run pnpm install"]
+      setup: ["deps.get"]
     ]
   end
 end
