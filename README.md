@@ -1,5 +1,15 @@
 # ExStreams
 
+Receive strams from Binance endpoint
+
+Render:
+- statistics:
+  - instant price
+  - moving average over 5s
+- SSR rendered SVG chart with `contEx` of the moving average. The whole SVg is send over the LiveSocket but LiveView renderes only the changes
+- CSR rendered chart in Canvas with `lightweight-charts` of the moving average.
+- [TODO] CSR with `uPlot`
+  
 ## Example
 
 <img width="607" alt="Screenshot 2025-07-08 at 10 01 13" src="https://github.com/user-attachments/assets/b89cd919-d235-4471-b6af-ff2a832418a8" />
