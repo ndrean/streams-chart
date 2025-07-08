@@ -4,6 +4,8 @@ defmodule ExStreams.DataGenerator do
   """
   use GenServer, restart: :transient
 
+  require Logger
+
   @topic "data_stream"
 
   defstruct [:stream_pid, :data_count, :start_time, :is_running, :genserver_pid, :interval]
@@ -145,7 +147,7 @@ defmodule ExStreams.DataGenerator do
 
   @impl true
   def terminate(reason, _state) do
-    IO.inspect(reason, label: "DataGenerator terminated with reason: ")
+    Logger.info("[DataGenerator] terminated: #{inspect(reason)}", ansi_color: :yellow)
     :ok
   end
 end

@@ -2,17 +2,29 @@ defmodule Mix.Tasks.Vite.Install do
   use Mix.Task
   import Mix.Generator
 
-  def context() do
-    # Get application name from mix.exs
-    app_name = Mix.Project.config()[:app]
-    app_module = Mix.Project.config()[:app] |> Atom.to_string() |> Macro.camelize()
+  @moduledoc """
+  Installs and configures Vite for Phoenix LiveView projects.
 
-    %{
-      app_name: app_name,
-      app_module: app_module,
-      web_module: "#{app_module}Web"
-    }
-  end
+  Sets up a complete Vite-based asset pipeline with Tailwind CSS, pnpm workspace,
+  and generates helper modules for development and production asset handling.
+
+  ## Usage
+
+      $ mix vite.install
+      $ mix vite.install --dep alpinejs --dev-dep postcss
+
+  ## Options
+
+    * `--dep` - Add a regular dependency (can be used multiple times)
+    * `--dev-dep` - Add a development dependency (can be used multiple times)
+
+  ## Examples
+
+      $ mix vite.install --dep react --dep lodash
+      $ mix vite.install --dev-dep sass --dev-dep autoprefixer
+
+  """
+  @shortdoc "Installs and configures Vite for Phoenix projects"
 
   @impl Mix.Task
   def run(args) do
@@ -65,6 +77,18 @@ defmodule Mix.Tasks.Vite.Install do
     append_to_file("config/dev.exs", vite_watcher_template(context()))
 
     Mix.shell().info("Assets installation completed!")
+  end
+
+  defp context() do
+    # Get application name from mix.exs
+    app_name = Mix.Project.config()[:app]
+    app_module = Mix.Project.config()[:app] |> Atom.to_string() |> Macro.camelize()
+
+    %{
+      app_name: app_name,
+      app_module: app_module,
+      web_module: "#{app_module}Web"
+    }
   end
 
   defp setup_pnpm_workspace(extra_deps) do
