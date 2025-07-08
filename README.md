@@ -10,6 +10,7 @@ Render:
 - statistics:
   - instant price via `@streams`
   - moving average over 5s
+  - trend with dynamic SVG
 - SSR rendered SVG chart with `contEx` of the moving average. The whole SVg is send over the LiveSocket but LiveView renderes only the changes
 - CSR rendered chart in Canvas with `lightweight-charts` of the moving average. Only the last tuple `[time, value]` is sent.
 - [TODO] CSR with `uPlot`
