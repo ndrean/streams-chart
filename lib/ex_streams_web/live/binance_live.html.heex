@@ -85,13 +85,16 @@
 <div class="bg-white p-6 rounded-lg shadow-lg border">
   <div
     id="lightweight-chart"
-    phx-hook="Chart"
+    phx-hook="LWChart"
     class="flex justify-center w-full"
     phx-update="ignore"
   >
   </div>
 </div>
 <br />
+<div class="bg-white p-6 rounded-lg shadow-lg border">
+  <div id="uplot" phx-hook="UPChart" class="flex justify-center w-full" phx-update="ignore"></div>
+</div>
 
 <!-- Raw Data Stream -->
 <%!-- <div class="bg-gray-50 p-6 rounded-lg">

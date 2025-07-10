@@ -6,7 +6,8 @@ import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
 import topbar from "topbar";
 
-import { Chart } from "./chart.js";
+import { LWChart } from "./lwChart.js";
+import { UPChart } from "./UPChart.js";
 
 const csrfToken = document
   .querySelector("meta[name='csrf-token']")
@@ -14,7 +15,7 @@ const csrfToken = document
 const liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
   params: { _csrf_token: csrfToken },
-  hooks: { Chart },
+  hooks: { LWChart, UPChart },
 });
 
 // Show progress bar on live navigation and form submits

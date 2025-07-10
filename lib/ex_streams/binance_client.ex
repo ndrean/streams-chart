@@ -5,8 +5,8 @@ defmodule ExStreams.BinanceClient do
   require Logger
 
   def start_link(url: url, topic: topic) do
-    true =
-      :ets.insert(:binance_data, {:price, 0})
+    # true =
+    #   :ets.insert(:binance_data, {:price, 0})
 
     {:ok, _pid} = WebSockex.start_link(url, __MODULE__, topic: topic)
   end
@@ -41,8 +41,8 @@ defmodule ExStreams.BinanceClient do
     #     end
     #   end
 
-    true =
-      :ets.insert(:binance_data, {:price, new_price})
+    # true =
+    #   :ets.insert(:binance_data, {:price, new_price})
 
     :ok =
       Phoenix.PubSub.broadcast(

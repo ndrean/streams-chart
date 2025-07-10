@@ -1,22 +1,23 @@
 {
-  "type": "module",
   "dependencies": {
-    "lightweight-charts": "^5.0.8",
+    "lightweight-charts": "latest",
     "phoenix": "workspace:*",
     "phoenix_html": "workspace:*",
     "phoenix_live_view": "workspace:*",
-    "topbar": "^3.0.0"
+    "topbar": "latest",
+    "uplot": "latest"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "latest",
+    "@tailwindcss/oxide": "latest",
+    "@tailwindcss/typography": "latest",
+    "@tailwindcss/vite": "latest",
+    "daisyui": "latest",
+    "fast-glob": "latest",
+    "tailwindcss": "latest",
+    "vite": "latest",
+    "vite-plugin-static-copy": "latest"
   },
   "packageManager": "pnpm@10.12.4",
-  "devDependencies": {
-    "@tailwindcss/forms": "^0.5.10",
-    "@tailwindcss/oxide": "^4.1.11",
-    "@tailwindcss/typography": "^0.5.16",
-    "@tailwindcss/vite": "^4.1.11",
-    "daisyui": "^5.0.46",
-    "fast-glob": "^3.3.3",
-    "tailwindcss": "^4.1.11",
-    "vite": "^7.0.3",
-    "vite-plugin-static-copy": "^3.1.0"
-  }
+  "type": "module"
 }

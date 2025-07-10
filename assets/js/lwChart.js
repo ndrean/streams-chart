@@ -26,7 +26,7 @@ const config = {
   },
 };
 
-export const Chart = {
+export const LWChart = {
   mounted() {
     const chart = createChart(this.el, config);
 
@@ -38,11 +38,21 @@ export const Chart = {
 
     const btc = chart.addSeries(LineSeries, { priceScaleId: "right" });
 
-    window.addEventListener("phx:update_chart", ({ detail }) => {
+    this.updateChart = ({ detail }) => {
+      const time = Math.round(new Date().getTime() / 1000);
+      const value = detail.col_b;
+
+      // Update the chart with new data
       btc.update({
-        time: Math.round(new Date().getTime() / 1000),
-        value: detail.col_b,
+        time: time,
+        value: value,
       });
-    });
+    };
+
+    window.addEventListener("phx:update_chart", this.updateChart);
+    // this.handleEvent("update_chart", this.updateChart);
+  },
+  destroyed() {
+    window.removeEventListener("phx:update_chart", this.updateChart);
   },
 };

@@ -4,7 +4,7 @@ defmodule Vite do
   """
 
   def path(asset) do
-    case Application.get_env(:ex_streams, :env) do
+    case Application.get_env(:<%= @app_name %>, :env) do
       :dev -> "http://localhost:5173/" <> asset
       _ -> get_production_path(asset)
     end
@@ -20,7 +20,7 @@ defmodule Vite do
   end
 
   defp get_manifest do
-    manifest_path = Path.join(:code.priv_dir(:ex_streams), "static/.vite/manifest.json")
+    manifest_path = Path.join(:code.priv_dir(:<%= @app_name %>), "static/.vite/manifest.json")
 
     with {:ok, content} <- File.read(manifest_path),
          {:ok, decoded} <- Jason.decode(content) do
